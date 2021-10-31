@@ -1,0 +1,40 @@
+Forumulas Used:
+For NWEA Eligibility (required rit score at grade level):
+"IF(L2=""N/A"",""No"",
+  IF(G2=5,IF(L2>=204,""Yes"",""No""),
+  IF(G2=6,IF(L2>=210,""Yes"",""No""),
+  IF(G2=7,IF(L2>=214,""Yes"",""No""),
+  IF(G2=8,IF(L2>=217,""Yes"",""No""),
+  IF(G2>=9,IF(L2>=219,""Yes"",""No""),""UNKNOWN GRADE""))))))"
+To find ICA Distance to Met:
+"if(P2=""N/A"",""N/A"",if(isblank(P2),"""",
+switch(G2,9,P2-2567,
+10,P2-2571,
+11,P2-2577,
+12,P2-2583)
+))"
+
+Here is a basic summary of the structure:
+
+Info Sheet - I started a documentation sheet and listed a couple formulas I used but it's not really complete.
+Student List Sheet - This is the main sheet that lists all current english learner students and calculates their eligibility for reclassification. It starts with columns A-J that are filed from an export from our PowerSchool Student Information System (PS).
+
+The remaining Sheets are all data sheets with data imported from extracts from the various platforms we spoke about on our call:
+
+WPAData - Is imported from an Illuminate data extract.
+CurrentYearGPA - A PowerSchool data extract.
+LastEngGrade - A PowerSchool data extract.
+18-19 ELPAC Data - An extract from the CA State CAASPP Test Platform.
+NWEA Fall20 - A NWEA Assessment Platform data extract.
+ICA 20-21 ELA - An extract from the CA State CAASPP Test Platform.
+Language Codes - Just a data lookup table to match CA state language codes to names in column I of the student list.
+19-20 CalOutreach ELPAC - This is just some supplemental ELPAC data that was provided by state for SOME students during the COVID remote schooling period. It will not be used in future calculations.
+
+Here's basically what's going on in the Student List Sheet:
+Col A-J - The student list of english learners populated from PowerSchool student data.
+"Col K-S - Lookup of student results for the ELPAC test. Column K, Overall Level, needs to be 4 as the first requirement to be reclassified fluent english proficient (RFEP)."
+Col T-X - Lookup of student results from latest NWEA ELA test and check if they meet requirements for RFEP (W).
+Col Y-AC - Lookup of CAASPP ICA ELA scores and check if they meet RFEP requirements (AB).
+Col AD - AF - Lookup Writing Proficiency Assessment (WPA) scores and check if they meet RFEP requirements (AF).
+Col AG - AJ - These are lookups of current school performance metrics (GPA/Grades) that are merged into the attached RFEP form for teacher reference when approving reclassification (see attached rfep form for details).
+Col AK - Returns Yes for Reclassification if they are found eligible in cols W or AB or AF.
